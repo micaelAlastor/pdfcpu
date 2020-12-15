@@ -24,10 +24,51 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pdfcpu/pdfcpu/pkg/log"
-	"github.com/pdfcpu/pdfcpu/pkg/pdfcpu"
+	"github.com/micaelAlastor/pdfcpu/pkg/log"
+	"github.com/micaelAlastor/pdfcpu/pkg/pdfcpu"
 	"github.com/pkg/errors"
 )
+
+// ExtractImagesReaders returns embedded image resources from rs for selected pages for further processing.
+func ExtractImagesReaders(rs io.ReadSeeker, fileName string, selectedPages []string, conf *pdfcpu.Configuration) ([]pdfcpu.Image, error) {
+	if rs == nil {
+		return nil, errors.New("pdfcpu: ExtractImagesReaders: Please provide rs")
+	}
+	if conf == nil {
+		conf = pdfcpu.NewDefaultConfiguration()
+	}
+
+	fromStart := time.Now()
+	ctx, _, _, _, err := readValidateAndOptimize(rs, conf, fromStart)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := ctx.EnsurePageCount(); err != nil {
+		return nil, err
+	}
+
+	pages, err := PagesForPageSelection(ctx.PageCount, selectedPages, true)
+	if err != nil {
+		return nil, err
+	}
+
+	fileName = strings.TrimSuffix(filepath.Base(fileName), ".pdf")
+
+	images := []pdfcpu.Image{}
+	for i, v := range pages {
+		if !v {
+			continue
+		}
+		ii, err := ctx.ExtractPageImages(i)
+		if err != nil {
+			return nil, err
+		}
+		images = append(images, ii...)
+	}
+
+	return images, nil
+}
 
 // ExtractImages dumps embedded image resources from rs into outDir for selected pages.
 func ExtractImages(rs io.ReadSeeker, outDir, fileName string, selectedPages []string, conf *pdfcpu.Configuration) error {

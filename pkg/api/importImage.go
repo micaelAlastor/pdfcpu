@@ -22,8 +22,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/pdfcpu/pdfcpu/pkg/log"
-	"github.com/pdfcpu/pdfcpu/pkg/pdfcpu"
+	"github.com/micaelAlastor/pdfcpu/pkg/log"
+	"github.com/micaelAlastor/pdfcpu/pkg/pdfcpu"
 )
 
 // ImportImages appends PDF pages containing images to rs and writes the result to w.

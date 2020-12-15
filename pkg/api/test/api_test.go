@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pdfcpu/pdfcpu/pkg/api"
+	"github.com/micaelAlastor/pdfcpu/pkg/api"
 )
 
 var inDir, outDir, resDir string

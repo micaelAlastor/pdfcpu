@@ -26,7 +26,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/pdfcpu/pdfcpu/pkg/filter"
+	"github.com/micaelAlastor/pdfcpu/pkg/filter"
 	"github.com/pkg/errors"
 )
 

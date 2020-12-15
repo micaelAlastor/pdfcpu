@@ -20,7 +20,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pdfcpu/pdfcpu/pkg/log"
+	"github.com/micaelAlastor/pdfcpu/pkg/log"
 )
 
 func csvSafeString(s string) string {

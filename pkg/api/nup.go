@@ -21,8 +21,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/pdfcpu/pdfcpu/pkg/log"
-	"github.com/pdfcpu/pdfcpu/pkg/pdfcpu"
+	"github.com/micaelAlastor/pdfcpu/pkg/log"
+	"github.com/micaelAlastor/pdfcpu/pkg/pdfcpu"
 )
 
 // NUpFromImage creates a single page n-up PDF for one image
